@@ -1,69 +1,34 @@
 # Kitty Froste... Glass? ﹏
 
-A frosted-glass Kitty terminal setup with a sleepy midnight palette, transparent windows, and just enough blur to make it look *almost* futuristic.
+A frosted-glass Kitty terminal setup with a sleepy midnight palette, transparent windows, and just enough blur to look *almost* futuristic.
 
-Also includes an optional Hyprland config for anyone on a slightly stronger Linux setup (Hyprland enjoyers, assemble).
+## Easy install
 
-## What this does
-
-- Makes Kitty translucent with `background_opacity 0.5`
-- Gives the terminal a midnight-purple color scheme
-- Adds rounded Kitty windows and blur with the Hyprland Lua config
-- Uses JetBrains Mono Nerd Font
-- Starts Fish in the terminal
-- Adds comfy padding, top tabs, and a scrollback of 20,000 lines
-- Includes keyboard shortcuts for tabs, windows, copying, pasting, and font size
-
-## Files
-
-- `kitty.conf` — the main Kitty configuration
-- `(Extra only)Hyprland.lua` — optional extra blur and window rules for Hyprland
-
-## Install
-
-Back up whatever Kitty currently has going on:
+On Linux, with Kitty and Hyprland installed, download this repo and run the installer:
 
 ```bash
-cp ~/.config/kitty/kitty.conf ~/.config/kitty/kitty.conf.backup
+curl -fsSL https://raw.githubusercontent.com/Spacehat123/Kitty-Frosted-Glass/main/install.sh -o install.sh
+chmod +x install.sh
+./install.sh
 ```
 
-Then copy this config:
+The installer creates `kitty.conf` and the Hyprland extra only if they don't already exist. It backs up your `hyprland.conf` before adding a `source` line, and won't overwrite your existing Kitty or Hyprland configs. You can also download `install.sh` and run it from your file manager/terminal.
 
-```bash
-mkdir -p ~/.config/kitty
-cp kitty.conf ~/.config/kitty/kitty.conf
-```
+The optional `(Extra only)Hyprland.lua` is copied into your Hyprland config folder if missing. It is not automatically loaded: standard Hyprland uses `hyprland.conf`, so the installer connects the native config extra instead.
 
-Restart Kitty or reload the config with:
+## What's in here
 
-```text
-Ctrl+Shift+F5
-```
+- `kitty.conf` — midnight colors, transparency, comfy padding, tabs, keybinds, and more
+- `(Extras only)Hyprland.conf` — blur, rounded corners, borders, shadows, and animations
+- `(Extra only)Hyprland.lua` — an optional extra for setups that already load that Lua config format
+- `install.sh` — the one-file installer
 
-## Optional: Hyprland extra
+You'll want JetBrainsMono Nerd Font for the intended look. The Kitty config also uses Fish at `/usr/bin/fish`; edit that line in `kitty.conf` if Fish lives somewhere else (or you use a different shell).
 
-This repo's Lua file is **extra only**. It enables Hyprland blur and applies a frosted treatment specifically to windows named `kitty`.
+After installing, reload Kitty with `Ctrl+Shift+F5` and Hyprland with `hyprctl reload`.
 
-Where you place it depends on your Hyprland setup, but it should generally live somewhere your Hyprland Lua configuration loads.
+## Heads-up
 
-Keep the Kitty config too — they do different jobs:
+This config uses newer Hyprland options such as `rounding_power`, blur vibrancy, and `resize_on_border`; compatibility depends on your Hyprland version. The installer does not replace existing configs, so if you already have one, the new Kitty settings won't be applied automatically. Backups of `hyprland.conf` are saved as `hyprland.conf.kitty-frosted-glass-backup` when the installer adds its source line.
 
-- Kitty handles the terminal appearance
-- Hyprland handles compositor blur and window decoration
-
-## You'll probably want these
-
-- [Kitty](https://sw.kovidgoyal.net/kitty/) terminal
-- [Fish](https://fishshell.com/) shell
-- [JetBrains Mono Nerd Font](https://www.nerdfonts.com/font-downloads)
-- Hyprland, if using `(Extra only)Hyprland.lua`
-
-## Little notes
-
-- The shell path is `/usr/bin/fish`, so change it if Fish lives elsewhere.
-- The blur in the Lua file needs compositor support.
-- Dynamic opacity is enabled, so Kitty can be transparent when the mood strikes.
-
-## License
-
-No license file has been added yet. If you want to let people freely reuse, modify, or share this theme, consider adding one.
+No license file yet, so ask before assuming you can do whatever with it.
